@@ -100,25 +100,36 @@ void LCD_INIT(){
     LCD_sendData(1);
     
  
-    
-    //RESET DISPLAY OFSET :
-    //https://linuxjedi.co.uk/2023/03/12/how-to-use-the-ssd1351-oled-display/
+     // Unlock display and turn off
     LCD_sendCommand(0xFD);
     LCD_sendData(0x12);
-    
-    LCD_sendCommand(0xFD);
+
+    LCD_sendCommand(0xFD); //UNLOCK
     LCD_sendData(0xB1);
+
+    // Setup SSD1351
+    LCD_sendCommand(0xA0); // Set Remap and Color Depth
+    LCD_sendData(0x76);     // Default: 0x74
+
+    LCD_sendCommand(0xA1); // Set Display Start Line
+    LCD_sendData(0x80);     // Default: 0x80
+
+    LCD_sendCommand(0xA2); // Set Display Offset
+    LCD_sendData(0x20);     // Default: 0x20
+
+    //LCD_sendCommand(0xA4); // Set Display Mode to Normal
+    //LCD_sendCommand(0xAF); // Display ON
     
-    //SET VERTICAL OFSET :
-    LCD_sendCommand(0xA2);
-    LCD_sendData(0x0);
+    //SET MUX RATIO
     
+    LCD_sendCommand(0xCA);
+    LCD_sendData(95);
 }
 void LCD_sendPixel(int x, int y, int r, int g, int b){
     //SET ADDRESS
     LCD_sendCommand(0x15); // column
-    LCD_sendData(y);
-    LCD_sendData(y);
+    LCD_sendData(0x10+y);
+    LCD_sendData(0x10+y);
     
     LCD_sendCommand(0x75); //row
     LCD_sendData(x);
@@ -137,8 +148,8 @@ void LCD_sendPixel(int x, int y, int r, int g, int b){
 void LCD_sendPixelArray(char startX, char startY, char lenX, char lenY, char * tab){
      //SET ADDRESS
     LCD_sendCommand(0x15);
-    LCD_sendData(startX);
-    LCD_sendData(startX+lenX);
+    LCD_sendData(0x10+startX);
+    LCD_sendData(0x10+startX+lenX);
     
     LCD_sendCommand(0x75);
     LCD_sendData(startY);
