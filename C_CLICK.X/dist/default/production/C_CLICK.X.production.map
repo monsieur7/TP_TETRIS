@@ -96,13 +96,13 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x1ac           0x282  (642)
-.text                        0x2ac               0x532           0x7cb  (1995)
-.init.delay32                0x7de                0x1c            0x2a  (42)
-.text                        0x7fa                0x18            0x24  (36)
-.dinit                       0x812                0x10            0x18  (24)
-.text                        0x822                0x14            0x1e  (30)
+.text                        0x2ac               0x548           0x7ec  (2028)
+.init.delay32                0x7f4                0x1c            0x2a  (42)
+.text                        0x810                0x18            0x24  (36)
+.dinit                       0x828                0x10            0x18  (24)
+.text                        0x838                0x14            0x1e  (30)
 
-                 Total "program" memory used (bytes):          0xad1  (2769) <1%
+                 Total "program" memory used (bytes):          0xaf2  (2802) <1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x8000]
@@ -143,43 +143,43 @@ External Symbols in Program Memory (by address):
                   0x0002fc                  _LCD_sendCommand
                   0x000316                  _LCD_sendData
                   0x000330                  _LCD_INIT
-                  0x000392                  _LCD_sendPixel
-                  0x0003e8                  _LCD_sendPixelArray
-                  0x0004e8                  _LCD_Clear
-                  0x00051e                  _LCD_resetXY
-                  0x00053c                  _main
-                  0x00058c                  _SPI1_Initialize
-                  0x0005a6                  _SPI1_Exchange
-                  0x0005d6                  _SPI1_ExchangeBuffer
-                  0x0006a0                  _SPI1_Exchange8bit
-                  0x0006b0                  _SPI1_Exchange8bitBuffer
-                  0x0006c4                  _SPI1_StatusGet
-                  0x0006cc                  _PIN_MANAGER_Initialize
-                  0x000782                  _CLOCK_Initialize
-                  0x0007de                  ___delay32
-                  0x000822                  _SYSTEM_Initialize
-                  0x000830                  _INTERRUPT_Initialize
+                  0x0003a2                  _LCD_sendPixel
+                  0x0003f8                  _LCD_sendPixelArray
+                  0x0004f8                  _LCD_Clear
+                  0x00052e                  _LCD_resetXY
+                  0x00054c                  _main
+                  0x0005a2                  _SPI1_Initialize
+                  0x0005bc                  _SPI1_Exchange
+                  0x0005ec                  _SPI1_ExchangeBuffer
+                  0x0006b6                  _SPI1_Exchange8bit
+                  0x0006c6                  _SPI1_Exchange8bitBuffer
+                  0x0006da                  _SPI1_StatusGet
+                  0x0006e2                  _PIN_MANAGER_Initialize
+                  0x000798                  _CLOCK_Initialize
+                  0x0007f4                  ___delay32
+                  0x000838                  _SYSTEM_Initialize
+                  0x000846                  _INTERRUPT_Initialize
                   0x0abf00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000782                  _CLOCK_Initialize
-                  0x000830                  _INTERRUPT_Initialize
-                  0x0004e8                  _LCD_Clear
+                  0x000798                  _CLOCK_Initialize
+                  0x000846                  _INTERRUPT_Initialize
+                  0x0004f8                  _LCD_Clear
                   0x000330                  _LCD_INIT
-                  0x00051e                  _LCD_resetXY
+                  0x00052e                  _LCD_resetXY
                   0x0002fc                  _LCD_sendCommand
                   0x000316                  _LCD_sendData
-                  0x000392                  _LCD_sendPixel
-                  0x0003e8                  _LCD_sendPixelArray
-                  0x0006cc                  _PIN_MANAGER_Initialize
-                  0x0005a6                  _SPI1_Exchange
-                  0x0006a0                  _SPI1_Exchange8bit
-                  0x0006b0                  _SPI1_Exchange8bitBuffer
-                  0x0005d6                  _SPI1_ExchangeBuffer
-                  0x00058c                  _SPI1_Initialize
-                  0x0006c4                  _SPI1_StatusGet
-                  0x000822                  _SYSTEM_Initialize
+                  0x0003a2                  _LCD_sendPixel
+                  0x0003f8                  _LCD_sendPixelArray
+                  0x0006e2                  _PIN_MANAGER_Initialize
+                  0x0005bc                  _SPI1_Exchange
+                  0x0006b6                  _SPI1_Exchange8bit
+                  0x0006c6                  _SPI1_Exchange8bitBuffer
+                  0x0005ec                  _SPI1_ExchangeBuffer
+                  0x0005a2                  _SPI1_Initialize
+                  0x0006da                  _SPI1_StatusGet
+                  0x000838                  _SYSTEM_Initialize
                   0x000246                  __AddressError
                   0x0002a6                  __DefaultInterrupt
                   0x0abf00                  __FSEC.sec
@@ -187,12 +187,12 @@ External Symbols in Program Memory (by name):
                   0x000286                  __NVMError
                   0x000204                  __OscillatorFail
                   0x000224                  __StackError
-                  0x0007de                  ___delay32
+                  0x0007f4                  ___delay32
                   0x000152                  __data_init
                   0x000152                  __data_init_da
                   0x00013c                  __psv_init
                   0x000100                  __resetPRI
-                  0x00053c                  _main
+                  0x00054c                  _main
                   0x0002ac                  _map4BitTo6BitColor
 
 Memory Configuration
@@ -338,7 +338,7 @@ __FDEVOPT1
  .debug_abbrev    0x000349        0x147 build/default/production/mcc_generated_files/spi1.o
  .debug_abbrev    0x000490        0x140 build/default/production/main.o
 
-.debug_line       0x000000        0x859
+.debug_line       0x000000        0x85f
  *(.debug_line)
  .debug_line      0x000000         0x55 build/default/production/mcc_generated_files/interrupt_manager.o
  .debug_line      0x000055        0x151 build/default/production/mcc_generated_files/traps.o
@@ -347,7 +347,7 @@ __FDEVOPT1
  .debug_line      0x000310        0x120 build/default/production/mcc_generated_files/system.o
  .debug_line      0x000430        0x12e build/default/production/mcc_generated_files/clock.o
  .debug_line      0x00055e        0x16d build/default/production/mcc_generated_files/spi1.o
- .debug_line      0x0006cb        0x18e build/default/production/main.o
+ .debug_line      0x0006cb        0x194 build/default/production/main.o
 
 .debug_frame      0x000000        0x3e4
  *(.debug_frame)
@@ -2631,42 +2631,42 @@ __c30_signature
 .config_BSLIM     0x0abf10          0x2
  .config_BSLIM    0x0abf10          0x2 build/default/production/mcc_generated_files/system.o
 
-.text             0x0002ac        0x532
- .text            0x0002ac        0x2e0 build/default/production/main.o
+.text             0x0002ac        0x548
+ .text            0x0002ac        0x2f6 build/default/production/main.o
                   0x0002ac                  _map4BitTo6BitColor
                   0x0002fc                  _LCD_sendCommand
                   0x000316                  _LCD_sendData
                   0x000330                  _LCD_INIT
-                  0x000392                  _LCD_sendPixel
-                  0x0003e8                  _LCD_sendPixelArray
-                  0x0004e8                  _LCD_Clear
-                  0x00051e                  _LCD_resetXY
-                  0x00053c                  _main
- .text            0x00058c        0x140 build/default/production/mcc_generated_files/spi1.o
-                  0x00058c                  _SPI1_Initialize
-                  0x0005a6                  _SPI1_Exchange
-                  0x0005d6                  _SPI1_ExchangeBuffer
-                  0x0006a0                  _SPI1_Exchange8bit
-                  0x0006b0                  _SPI1_Exchange8bitBuffer
-                  0x0006c4                  _SPI1_StatusGet
- .text            0x0006cc         0xb6 build/default/production/mcc_generated_files/pin_manager.o
-                  0x0006cc                  _PIN_MANAGER_Initialize
- .text            0x000782         0x5c build/default/production/mcc_generated_files/clock.o
-                  0x000782                  _CLOCK_Initialize
+                  0x0003a2                  _LCD_sendPixel
+                  0x0003f8                  _LCD_sendPixelArray
+                  0x0004f8                  _LCD_Clear
+                  0x00052e                  _LCD_resetXY
+                  0x00054c                  _main
+ .text            0x0005a2        0x140 build/default/production/mcc_generated_files/spi1.o
+                  0x0005a2                  _SPI1_Initialize
+                  0x0005bc                  _SPI1_Exchange
+                  0x0005ec                  _SPI1_ExchangeBuffer
+                  0x0006b6                  _SPI1_Exchange8bit
+                  0x0006c6                  _SPI1_Exchange8bitBuffer
+                  0x0006da                  _SPI1_StatusGet
+ .text            0x0006e2         0xb6 build/default/production/mcc_generated_files/pin_manager.o
+                  0x0006e2                  _PIN_MANAGER_Initialize
+ .text            0x000798         0x5c build/default/production/mcc_generated_files/clock.o
+                  0x000798                  _CLOCK_Initialize
 
-.init.delay32     0x0007de         0x1c
- .init.delay32    0x0007de         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32da.Meo)
-                  0x0007de                  ___delay32
+.init.delay32     0x0007f4         0x1c
+ .init.delay32    0x0007f4         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(delay32da.Meo)
+                  0x0007f4                  ___delay32
 
-.text             0x0007fa         0x18
- .text            0x0007fa         0x18 build/default/production/mcc_generated_files/traps.o
-                  0x0007fa                  _TRAPS_halt_on_error
+.text             0x000810         0x18
+ .text            0x000810         0x18 build/default/production/mcc_generated_files/traps.o
+                  0x000810                  _TRAPS_halt_on_error
 
-.dinit            0x000812         0x10
- .dinit           0x000812         0x10 data_init
+.dinit            0x000828         0x10
+ .dinit           0x000828         0x10 data_init
 
-.text             0x000822         0x14
- .text            0x000822          0xe build/default/production/mcc_generated_files/system.o
-                  0x000822                  _SYSTEM_Initialize
- .text            0x000830          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
-                  0x000830                  _INTERRUPT_Initialize
+.text             0x000838         0x14
+ .text            0x000838          0xe build/default/production/mcc_generated_files/system.o
+                  0x000838                  _SYSTEM_Initialize
+ .text            0x000846          0x6 build/default/production/mcc_generated_files/interrupt_manager.o
+                  0x000846                  _INTERRUPT_Initialize

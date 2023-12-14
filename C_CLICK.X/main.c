@@ -68,16 +68,17 @@ int main(void)
     LCD_INIT();
     LCD_Clear();
     char array[12*12] = {0};
-    for(char y = 0; y < 12; y++){
-        for(char x = 0; x < 12; x++){
-                array[y*12+x] = 0xcc;
+    for(char y = 0; y < 96; y++){
+        for(char x = 0; x < 96; x++){
+                array[y*96+x] = 0xab;
             
         }
     }
+     
     while (1)
     {
-        LCD_sendPixelArray(10, 10, 12, 12, array);
-     /*for(int x = 50; x < 96; x++){
+       
+LCD_sendPixelArray(0, 0, 96, 96, array);     /*for(int x = 50; x < 96; x++){
         for(int y = 50; y < 96; y++){
             LCD_sendPixel(x, y, 0xf, 0xf, 0xf);
         }
