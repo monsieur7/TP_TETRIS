@@ -149,7 +149,7 @@ void LCD_INIT(){
     LCD_sendCommand(0xCA);
     LCD_sendData(95);
 }
-void LCD_sendPixel(int x, int y, int r, int g, int b){
+void LCD_sendPixel(int x, int y, RGBColor rgb){
     //SET ADDRESS
     LCD_sendCommand(0x15); // column
     LCD_sendData(0x10+y);
@@ -160,8 +160,8 @@ void LCD_sendPixel(int x, int y, int r, int g, int b){
     LCD_sendData(x);
     
     LCD_sendCommand(0x5c); // WRITE
-    LCD_sendData((g & 0x07) | ((r & 0x1F) << 3)); // Combine green and red
-    LCD_sendData((b & 0x1F) | ((g & 0x07) << 5)); // Combine blue and green
+    LCD_sendData((rgb.g & 0x07) | ((rgb.r & 0x1F) << 3)); // Combine green and red
+    LCD_sendData((rgb.b & 0x1F) | ((rgb.g & 0x07) << 5)); // Combine blue and green
    //sendCommand(0x5c); //DISABLE WRITE NOT NEEDED
     
     
@@ -180,11 +180,9 @@ void LCD_sendPixelArray(char startX, char startY, char lenX, char lenY, char * t
     LCD_sendData(startY+lenY);
     
     LCD_sendCommand(0x5c); // WRITE
-    int r = 0; //FOR TEST ONLY
-    int g = 0;
     
     for (int y = 0; y < lenY; y++) {
-        for (int x = 0; x < lenX; x += 2) {
+        for (int x = 0; x < lenX; x++) {
         char pixel1 = tab[y * lenY + x] & 0x0F;
 
         // Map 4-bit color to 6-bit RGB
