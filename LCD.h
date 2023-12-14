@@ -33,6 +33,7 @@
 #include "mcc_generated_files/spi1.h"
 #include "mcc_generated_files/pin_manager.h"
 #include <xc.h> // include processor files - each processor file is guarded.  
+#define SCALE_4_TO_6_BIT(value) ((value * 63) / 15)
 
 #define SYS_FREQ        16000000L
 #define FCY             (SYS_FREQ/2)
@@ -67,6 +68,29 @@
  */
 // TODO Insert declarations or function prototypes (right here) to leverage 
 // live documentation
+
+//RGB MAP SHENANIGANS :
+// Define a structure to hold the RGB color components
+typedef struct {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} RGBColor;
+
+// Function to map a 4-bit color to a 6-bit RGB color
+RGBColor map4BitTo6BitColor(uint8_t color4Bit) {
+    // Scale the 4-bit color to a 6-bit value (0-63)
+    uint8_t color6Bit = (color4Bit * 63) / 15;
+
+    // Extract RGB components from the 6-bit value
+    RGBColor result;
+    result.r = color6Bit >> 3;          // Bits 5-3
+    result.g = (color6Bit >> 1) & 0x03; // Bits 2-1
+    result.b = (color6Bit & 0x01) << 4; // Bit 0 shifted to 4
+
+    return result;
+}
+
 void LCD_sendCommand(int command){
     CS_SetLow();
     D_C_SetLow();
@@ -159,20 +183,31 @@ void LCD_sendPixelArray(char startX, char startY, char lenX, char lenY, char * t
     int r = 0; //FOR TEST ONLY
     int g = 0;
     
-    for(int y = startY; y < startY+lenY; y++){
-        for(int x = startX; x < startX+lenX; x+=2){
-            char pixel1 = tab[y*lenY + x] & 0xf;
-            
-            LCD_sendData((g & 0x07) | ((r & 0x1F) << 3)); // Combine green and red
-            LCD_sendData((pixel1 & 0x1F) | ((g & 0x07) << 5)); // Combine blue and green
-            
-            char pixel2 = (tab[y*lenY + x] & 0xf0) >> 4;
-            
-            LCD_sendData((g & 0x07) | ((r & 0x1F) << 3)); // Combine green and red
-            LCD_sendData((pixel2 & 0x1F) | ((g & 0x07) << 5)); // Combine blue and green
-            
+    for (int y = 0; y < lenY; y++) {
+        for (int x = 0; x < lenX; x += 2) {
+        char pixel1 = tab[y * lenY + x] & 0x0F;
+
+        // Map 4-bit color to 6-bit RGB
+        RGBColor color1 = map4BitTo6BitColor(pixel1);
+
+        // Combine green and red
+        LCD_sendData((color1.g & 0x03) | ((color1.r & 0x07) << 2));
+
+        // Combine blue and green
+        LCD_sendData(((color1.b >> 4) & 0x03) | ((color1.g & 0x03) << 2));
+
+        char pixel2 = (tab[y * lenY + x] & 0xF0) >> 4;
+
+        // Map 4-bit color to 6-bit RGB
+        RGBColor color2 = map4BitTo6BitColor(pixel2);
+
+        // Combine green and red
+        LCD_sendData((color2.g & 0x03) | ((color2.r & 0x07) << 2));
+
+        // Combine blue and green
+        LCD_sendData(((color2.b >> 4) & 0x03) | ((color2.g & 0x03) << 2));
     }
-    }
+}
     
    
    //sendCommand(0x5c); //DISABLE WRITE NOT NEEDED
